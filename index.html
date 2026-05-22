@@ -535,7 +535,7 @@
                     <div class="mt-6 mb-6 border-t border-b border-black/10 py-4">
                         <p class="text-xs mb-1 text-readable-sub glass-text">Kepada Yth.<br>Bapak/Ibu/Saudara/i</p>
                         <h2 id="guest-name"
-                            class="font-playfair text-xl font-semibold mt-1 text-gold-dark glass-text-bold">-</h2>
+                            class="font-playfair text-xl font-bold mt-1 text-black glass-text-bold">-</h2>
                     </div>
                     <button onclick="openInvitation()"
                         class="bg-dusty hover:bg-gold text-white font-semibold py-3 px-8 rounded-full transition-all shadow-lg flex items-center justify-center mx-auto gap-2">
@@ -774,18 +774,9 @@
 
         // 2. Open Invitation
         function openInvitation() {
-            // Slide out the cover
-            document.getElementById('cover').style.transform = 'translateY(-100vh)';
-
-            // UNLOCK the main scroll container! This fixes the "no slides appearing" bug.
-            document.getElementById('app-container').style.overflowY = 'auto';
-
-            // Show music button
-            document.getElementById('music-toggle').classList.remove('hidden');
-
-            // Play music
             const audio = document.getElementById('bg-music');
-            audio.load(); // Force load for iOS Safari
+            
+            // Try to play immediately (most synchronous path for iOS Safari)
             audio.play().then(() => {
                 document.getElementById('music-toggle').classList.remove('paused');
             }).catch(e => {
@@ -795,12 +786,21 @@
                     audio.play().then(() => {
                         document.getElementById('music-toggle').classList.remove('paused');
                         document.removeEventListener('click', playOnGesture);
-                        document.removeEventListener('touchstart', playOnGesture);
+                        document.removeEventListener('touchend', playOnGesture);
                     }).catch(err => console.log("Failed to play on gesture", err));
                 };
                 document.addEventListener('click', playOnGesture);
-                document.addEventListener('touchstart', playOnGesture);
+                document.addEventListener('touchend', playOnGesture);
             });
+
+            // Slide out the cover
+            document.getElementById('cover').style.transform = 'translateY(-100vh)';
+
+            // UNLOCK the main scroll container! This fixes the "no slides appearing" bug.
+            document.getElementById('app-container').style.overflowY = 'auto';
+
+            // Show music button
+            document.getElementById('music-toggle').classList.remove('hidden');
 
             // Trigger animations for the first slide immediately
             setTimeout(() => {
