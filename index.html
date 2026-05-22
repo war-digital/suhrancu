@@ -322,9 +322,12 @@
         }
 
         @keyframes gentle-zoom {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
+
             50% {
                 transform: scale(1.1);
             }
@@ -512,9 +515,8 @@
             </button>
 
             <!-- Audio Element -->
-            <audio id="bg-music" loop playsinline preload="auto">
-                <source src="musik.mp3" type="audio/mpeg">
-            </audio>
+            <audio id="bg-music" src="musik.mp3" loop playsinline preload="auto"></audio>
+
 
             <!-- Floating Navigation Removed as per request -->
 
@@ -525,8 +527,10 @@
                 <!-- Zooming Background Layer -->
                 <div class="absolute inset-0 z-0 cover-bg animate-zoom"></div>
 
-                <div class="glass p-8 md:p-12 rounded-3xl text-center w-11/12 max-w-sm animate-view zoom-in relative z-10">
-                    <h3 class="font-poppins text-xs tracking-[0.3em] mb-4 uppercase text-dark font-semibold glass-text">The Wedding Of</h3>
+                <div
+                    class="glass p-8 md:p-12 rounded-3xl text-center w-11/12 max-w-sm animate-view zoom-in relative z-10">
+                    <h3 class="font-poppins text-xs tracking-[0.3em] mb-4 uppercase text-dark font-semibold glass-text">
+                        The Wedding Of</h3>
                     <h1 class="font-brittany text-5xl mb-6 text-black drop-shadow-sm">Suhra & Ancu</h1>
                     <div class="mt-6 mb-6 border-t border-b border-black/10 py-4">
                         <p class="text-xs mb-1 text-readable-sub glass-text">Kepada Yth.<br>Bapak/Ibu/Saudara/i</p>
@@ -626,7 +630,8 @@
             <section id="schedule" class="slide-section px-6 py-12" data-bg="2">
                 <div class="animate-view morph-rise text-center mb-8 mt-10">
                     <h2 class="font-brittany text-4xl text-readable mb-2 glass-text-bold">Rangkaian Acara</h2>
-                    <p class="font-playfair text-xs text-black font-medium" style="text-shadow: 0 0 4px rgba(255,255,255,0.9), 0 0 8px rgba(255,255,255,0.7);">Kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
+                    <p class="font-playfair text-xs text-black" style="text-shadow: 0 0 2px rgba(255,255,255,0.8);">
+                        Kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
                 </div>
 
                 <div class="timeline-container relative w-full px-2">
@@ -634,17 +639,23 @@
                     <div class="timeline-item">
                         <div class="card-modern p-5 shadow-lg animate-view slide-left delay-200">
                             <h3 class="font-playfair font-bold text-lg text-gold-dark mb-1">Akad Nikah</h3>
-                            <p class="text-xs mb-1 text-black"><i class="far fa-calendar-alt text-gold mr-2"></i> Kamis, 04 Juni 2026</p>
-                            <p class="text-xs mb-1 text-black"><i class="far fa-clock text-gold mr-2"></i> 10:00 WITA - Selesai</p>
-                            <p class="text-xs text-black"><i class="fas fa-map-marker-alt text-gold mr-2"></i> Lokasi: [Kediaman Mempelai Wanita : Salukaili]</p>
+                            <p class="text-xs mb-1 text-black"><i class="far fa-calendar-alt text-gold mr-2"></i> Kamis,
+                                04 Juni 2026</p>
+                            <p class="text-xs mb-1 text-black"><i class="far fa-clock text-gold mr-2"></i> 10:00 WITA -
+                                Selesai</p>
+                            <p class="text-xs text-black"><i class="fas fa-map-marker-alt text-gold mr-2"></i> Lokasi:
+                                [Kediaman Mempelai Wanita : Salukaili]</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="card-modern p-5 shadow-lg animate-view slide-left delay-300">
                             <h3 class="font-playfair font-bold text-lg text-gold-dark mb-1">Resepsi</h3>
-                            <p class="text-xs mb-1 text-black"><i class="far fa-calendar-alt text-gold mr-2"></i> Kamis, 04 Juni 2026</p>
-                            <p class="text-xs mb-1 text-black"><i class="far fa-clock text-gold mr-2"></i> 19:00 WITA - Selesai</p>
-                            <p class="text-xs text-black"><i class="fas fa-map-marker-alt text-gold mr-2"></i> Lokasi: [Salukaili, Dusun Salukaili Desa Kasano Kec. Baras (Dekat SMPN 1 BARAS)]</p>
+                            <p class="text-xs mb-1 text-black"><i class="far fa-calendar-alt text-gold mr-2"></i> Kamis,
+                                04 Juni 2026</p>
+                            <p class="text-xs mb-1 text-black"><i class="far fa-clock text-gold mr-2"></i> 19:00 WITA -
+                                Selesai</p>
+                            <p class="text-xs text-black"><i class="fas fa-map-marker-alt text-gold mr-2"></i> Lokasi:
+                                [Salukaili, Dusun Salukaili Desa Kasano Kec. Baras (Dekat SMPN 1 BARAS)]</p>
                         </div>
                     </div>
                 </div>
@@ -670,24 +681,13 @@
                             <i class="far fa-copy"></i> Salin Rekening
                         </button>
                     </div>
-                    <!-- Bank 2 -->
-                    <div
-                        class="animate-view flip-in delay-200 card-modern p-5 shadow-lg text-center relative overflow-hidden">
-                        <h3 class="font-bold text-lg text-orange-600">BNI</h3>
-                        <p class="font-mono text-base tracking-widest my-1 text-readable" id="rek-bni">0987654321</p>
-                        <p class="text-xs text-readable-muted mb-3">a.n Ancu</p>
-                        <button onclick="copyText('rek-bni')"
-                            class="bg-white/30 backdrop-blur-sm text-dark text-xs px-4 py-2 rounded-lg shadow-sm hover:bg-white/50 border border-white/40 transition">
-                            <i class="far fa-copy"></i> Salin Rekening
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Toast Notification -->
-                <div id="toast"
-                    class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-dark text-white px-4 py-2 rounded-lg opacity-0 transition-opacity duration-300 pointer-events-none z-[80] text-sm whitespace-nowrap">
-                    Berhasil disalin!
-                </div>
+
+                    <!-- Toast Notification -->
+                    <div id="toast"
+                        class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-dark text-white px-4 py-2 rounded-lg opacity-0 transition-opacity duration-300 pointer-events-none z-[80] text-sm whitespace-nowrap">
+                        Berhasil disalin!
+                    </div>
             </section>
 
             <!-- SLIDE 5: WISHES & FOOTER -->
@@ -785,9 +785,22 @@
 
             // Play music
             const audio = document.getElementById('bg-music');
+            audio.load(); // Force load for iOS Safari
             audio.play().then(() => {
                 document.getElementById('music-toggle').classList.remove('paused');
-            }).catch(e => console.log("Auto-play prevented"));
+            }).catch(e => {
+                console.log("Auto-play prevented, waiting for user gesture.", e);
+                // Fallback: play on first user interaction if blocked
+                const playOnGesture = () => {
+                    audio.play().then(() => {
+                        document.getElementById('music-toggle').classList.remove('paused');
+                        document.removeEventListener('click', playOnGesture);
+                        document.removeEventListener('touchstart', playOnGesture);
+                    }).catch(err => console.log("Failed to play on gesture", err));
+                };
+                document.addEventListener('click', playOnGesture);
+                document.addEventListener('touchstart', playOnGesture);
+            });
 
             // Trigger animations for the first slide immediately
             setTimeout(() => {
