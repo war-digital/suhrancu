@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Undangan Pernikahan - Suhra & Ancu</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Brittany Signature Font -->
+    <link href="https://fonts.cdnfonts.com/css/brittany-signature" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FDFBF7',
+                        gold: '#D4AF37',
+                        dusty: '#DCAE96',
+                        dark: '#333333'
+                    },
+                    fontFamily: {
+                        vibes: ['Great Vibes', 'cursive'],
+                        playfair: ['Playfair Display', 'serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                        brittany: ['Brittany Signature', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        html {
+            background-color: #1a202c;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a202c;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            /* Prevents whole page from scrolling */
+        }
+
+        #app-container {
+            width: 100%;
+            max-width: 480px;
+            height: 100vh;
+            background-color: #FDFBF7;
+            position: relative;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+
+            /* Hidden initially to lock scroll under Cover */
+            overflow-y: hidden;
+            overflow-x: hidden;
+
+            /* Continuous smooth scrolling without hard stops */
+            scroll-behavior: smooth;
+        }
+
+        /* Hide scrollbar for seamless app look */
+        #app-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        #app-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .slide-section {
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-x: hidden;
+            /* Added padding so sections flow naturally into each other */
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .slide-section::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .slide-section::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .slide-section::-webkit-scrollbar-thumb {
+            background: #DCAE96;
+            border-radius: 4px;
+        }
+
+        /* Typography */
+        body {
+            font-weight: 500;
+            -webkit-font-smoothing: antialiased;
+            text-shadow: 0px 0px 0.5px rgba(0, 0, 0, 0.15);
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .font-vibes {
+            font-family: 'Great Vibes', cursive;
+            font-weight: bold;
+            text-shadow: 0 0 1px currentColor;
+        }
+
+        .font-brittany {
+            font-family: 'Brittany Signature', cursive;
+            font-weight: normal;
+        }
+
+        /* Readable text helpers */
+        .text-readable {
+            color: #1a1a1a;
+        }
+
+        .text-readable-sub {
+            color: #4a4a4a;
+        }
+
+        .text-readable-muted {
+            color: #6b6b6b;
+        }
+
+        .text-gold-dark {
+            color: #856404;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+        }
+
+        .text-dusty-dark {
+            color: #8a573c;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+        }
+
+        /* 3D Perspective Container */
+        .slide-section {
+            perspective: 1200px;
+        }
+
+        /* ===== STUNNING MORPH ANIMATION SYSTEM ===== */
+        .animate-view {
+            opacity: 0;
+            transition:
+                opacity 1.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 2.2s cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 2.2s cubic-bezier(0.19, 1, 0.22, 1);
+            will-change: transform, opacity;
+        }
+
+        /* Entry Variants */
+        .fade-up {
+            transform: translateY(80px) scale(0.92);
+        }
+
+        .zoom-in {
+            transform: scale(0.6) rotateX(15deg);
+            transform-origin: center bottom;
+        }
+
+        .fade-in {
+            transform: translateY(0);
+        }
+
+        .flip-in {
+            transform: rotateY(-90deg) scale(0.8);
+            transform-origin: left center;
+        }
+
+        .slide-left {
+            transform: translateX(-120px) rotateZ(-5deg) scale(0.85);
+        }
+
+        .slide-right {
+            transform: translateX(120px) rotateZ(5deg) scale(0.85);
+        }
+
+        .morph-rise {
+            transform: translateY(100px) scale(0.7) rotateX(25deg);
+            transform-origin: center bottom;
+        }
+
+        .pop-in {
+            transform: scale(0) rotateZ(15deg);
+        }
+
+        /* Revealed State */
+        .show {
+            opacity: 1 !important;
+            transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0) !important;
+        }
+
+        /* Stagger Delays */
+        .delay-100 {
+            transition-delay: 150ms;
+        }
+
+        .delay-200 {
+            transition-delay: 350ms;
+        }
+
+        .delay-300 {
+            transition-delay: 550ms;
+        }
+
+        .delay-400 {
+            transition-delay: 750ms;
+        }
+
+        /* Shimmer Glow on cards after reveal */
+        @keyframes shimmer-glow {
+            0% {
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            }
+
+            50% {
+                box-shadow: 0 8px 40px rgba(212, 175, 55, 0.2), 0 0 20px rgba(220, 174, 150, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            }
+
+            100% {
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        .show.card-modern,
+        .show.card-modern-solid {
+            animation: shimmer-glow 3s ease-in-out 1.5s 1;
+        }
+
+        /* Pulse ring on photos */
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(212, 175, 55, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+            }
+        }
+
+        .show .photo-ring {
+            animation: pulse-ring 2s ease-out 1s 1;
+        }
+
+        /* Floating subtle animation after reveal */
+        @keyframes gentle-float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .show.float-after {
+            animation: gentle-float 4s ease-in-out 2s infinite;
+        }
+
+        /* Backgrounds */
+        .cover-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('bg1.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(253, 251, 247, 0.6), rgba(253, 251, 247, 0.6)), url('bg2.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .bg-1 {
+            background-image: linear-gradient(rgba(253, 251, 247, 0.35), rgba(253, 251, 247, 0.35)), url('bg1.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .bg-2 {
+            background-image: linear-gradient(rgba(253, 251, 247, 0.35), rgba(253, 251, 247, 0.35)), url('bg2.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        @keyframes slow-pan {
+            0% {
+                transform: scale(1) translate(0px, 0px);
+            }
+
+            100% {
+                transform: scale(1.15) translate(-15px, 15px);
+            }
+        }
+
+        .bg-pan {
+            animation: slow-pan 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes gentle-zoom {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .animate-zoom {
+            animation: gentle-zoom 10s ease-in-out infinite;
+        }
+
+        /* Glassmorphism - elegant transparent */
+        .glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 100%);
+            backdrop-filter: blur(6px) saturate(1.2);
+            -webkit-backdrop-filter: blur(6px) saturate(1.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        /* Modern transparent glass card */
+        .card-modern {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.18) 100%);
+            backdrop-filter: blur(28px) saturate(1.6);
+            -webkit-backdrop-filter: blur(28px) saturate(1.6);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 16px;
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                0 2px 8px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+
+        .card-modern:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow:
+                0 12px 40px rgba(0, 0, 0, 0.15),
+                0 4px 12px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        }
+
+        /* Modern less-transparent glass card for enhanced readability */
+        .card-modern-solid {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0.22) 100%);
+            backdrop-filter: blur(30px) saturate(2.2);
+            -webkit-backdrop-filter: blur(30px) saturate(2.2);
+            border: 1.5px solid rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow:
+                0 15px 35px 0 rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+                inset 0 -1px 0 0 rgba(255, 255, 255, 0.2);
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+
+        .card-modern-solid:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.95);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        }
+
+        /* Cover glass - dark transparent for cover overlay */
+        .glass-cover {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.35) 100%);
+            backdrop-filter: blur(24px) saturate(1.4);
+            -webkit-backdrop-filter: blur(24px) saturate(1.4);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        /* Text shadow for readability on glass */
+        .glass-text {
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .glass-text-bold {
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Music button */
+        .music-btn {
+            animation: spin 4s linear infinite;
+        }
+
+        .music-btn.paused {
+            animation-play-state: paused;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Flower Animation */
+        .flower {
+            position: absolute;
+            top: -10vh;
+            z-index: 40;
+            animation: fall linear infinite;
+            opacity: 0.6;
+            pointer-events: none;
+            width: 20px;
+            height: 20px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23DCAE96" d="M256 0c-17.7 0-32 14.3-32 32V44.4c-39.7 18.2-72 50.5-90.2 90.2H89.4c-17.7 0-32 14.3-32 32s14.3 32 32 32h44.4c18.2 39.7 50.5 72 90.2 90.2V333.3c0 17.7 14.3 32 32 32s32-14.3 32-32V288.9c39.7-18.2 72-50.5 90.2-90.2h44.4c17.7 0 32-14.3 32-32s-14.3-32-32-32h-44.4c-18.2-39.7-50.5-72-90.2-90.2V32c0-17.7-14.3-32-32-32z"/></svg>');
+            background-size: cover;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg) translateX(0);
+            }
+
+            50% {
+                transform: translateY(55vh) rotate(180deg) translateX(20px);
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(360deg) translateX(-20px);
+            }
+        }
+
+        /* Timeline inside Schedule */
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #DCAE96;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 45px;
+            margin-bottom: 24px;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            left: 13px;
+            top: 15px;
+            background-color: #FDFBF7;
+            border: 3px solid #DCAE96;
+            border-radius: 50%;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app-container">
+
+        <!-- Sticky Background Layer (Parallax & Crossfade) -->
+        <div class="sticky top-0 w-full h-[100vh] z-0 overflow-hidden pointer-events-none">
+            <div id="bg-layer-1"
+                class="absolute inset-0 bg-1 bg-pan transition-opacity duration-[1500ms] ease-in-out opacity-100"></div>
+            <div id="bg-layer-2"
+                class="absolute inset-0 bg-2 bg-pan transition-opacity duration-[1500ms] ease-in-out opacity-0"></div>
+        </div>
+
+        <!-- Content Wrapper -->
+        <div class="relative z-10 w-full -mt-[100vh]">
+
+            <!-- Loading Screen -->
+            <div id="loading"
+                class="absolute inset-0 z-[100] bg-cream flex flex-col items-center justify-center transition-opacity duration-700">
+                <i class="fas fa-heart text-dusty text-4xl animate-bounce"></i>
+                <p class="mt-4 font-playfair text-xl text-gold">Memuat Undangan...</p>
+            </div>
+
+            <!-- Floating Audio Control -->
+            <button id="music-toggle"
+                class="hidden absolute bottom-24 right-4 z-[60] bg-gold text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center music-btn paused"
+                onclick="toggleMusic()">
+                <i class="fas fa-compact-disc text-2xl"></i>
+            </button>
+
+            <!-- Audio Element -->
+            <audio id="bg-music" loop>
+                <source src="musik.mp3" type="audio/mpeg">
+            </audio>
+
+            <!-- Floating Navigation Removed as per request -->
+
+            <!-- COVER SECTION (Absolute Overlay) -->
+            <section id="cover"
+                class="absolute top-0 left-0 w-full h-[100vh] z-[70] flex flex-col items-center justify-center text-white transition-transform duration-1000 ease-in-out overflow-hidden"
+                data-bg="1">
+                <!-- Zooming Background Layer -->
+                <div class="absolute inset-0 z-0 cover-bg animate-zoom"></div>
+
+                <div class="glass p-8 md:p-12 rounded-3xl text-center w-11/12 max-w-sm animate-view zoom-in relative z-10">
+                    <h3 class="font-poppins text-xs tracking-[0.3em] mb-4 uppercase text-dark font-semibold glass-text">The Wedding Of</h3>
+                    <h1 class="font-brittany text-5xl mb-6 text-black drop-shadow-sm">Suhra & Ancu</h1>
+                    <div class="mt-6 mb-6 border-t border-b border-black/10 py-4">
+                        <p class="text-xs mb-1 text-readable-sub glass-text">Kepada Yth.<br>Bapak/Ibu/Saudara/i</p>
+                        <h2 id="guest-name"
+                            class="font-playfair text-xl font-semibold mt-1 text-gold-dark glass-text-bold">-</h2>
+                    </div>
+                    <button onclick="openInvitation()"
+                        class="bg-dusty hover:bg-gold text-white font-semibold py-3 px-8 rounded-full transition-all shadow-lg flex items-center justify-center mx-auto gap-2">
+                        <i class="fas fa-envelope-open-text"></i> Buka Undangan
+                    </button>
+                </div>
+            </section>
+
+            <!-- SLIDE 1: HERO -->
+            <section id="hero" class="slide-section px-6 pt-10 pb-20" data-bg="2">
+                <div class="animate-view morph-rise text-center z-10 flex flex-col items-center justify-center h-full">
+                    <h3 class="font-poppins text-xs tracking-[0.2em] mb-2 uppercase text-readable-sub">You Are Invited
+                        To</h3>
+                    <h1 class="font-brittany text-5xl text-readable my-3 drop-shadow-sm">Suhra & Ancu</h1>
+
+                    <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-gold shadow-xl my-6 photo-ring">
+                        <img src="sampul.jpg" alt="Prewedding" class="w-full h-full object-cover">
+                    </div>
+
+                    <p class="font-playfair text-lg text-readable mb-4 font-semibold animate-view zoom-in delay-100">
+                        Kamis, 04 Juni 2026</p>
+
+                    <!-- Countdown Timer -->
+                    <div
+                        class="flex justify-center gap-3 card-modern p-4 w-full max-w-xs mx-auto float-after animate-view zoom-in delay-200">
+                        <div class="text-center">
+                            <div id="days" class="text-2xl font-playfair font-bold text-readable">00</div>
+                            <div class="text-[10px] font-poppins uppercase text-readable-muted">Hari</div>
+                        </div>
+                        <div class="text-xl font-playfair text-dusty pt-1">:</div>
+                        <div class="text-center">
+                            <div id="hours" class="text-2xl font-playfair font-bold text-readable">00</div>
+                            <div class="text-[10px] font-poppins uppercase text-readable-muted">Jam</div>
+                        </div>
+                        <div class="text-xl font-playfair text-dusty pt-1">:</div>
+                        <div class="text-center">
+                            <div id="minutes" class="text-2xl font-playfair font-bold text-readable">00</div>
+                            <div class="text-[10px] font-poppins uppercase text-readable-muted">Menit</div>
+                        </div>
+                        <div class="text-xl font-playfair text-dusty pt-1">:</div>
+                        <div class="text-center">
+                            <div id="seconds" class="text-2xl font-playfair font-bold text-readable">00</div>
+                            <div class="text-[10px] font-poppins uppercase text-readable-muted">Detik</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 animate-bounce text-gray-400">
+                        <i class="fas fa-chevron-down"></i>
+                        <p class="text-xs mt-1">Geser ke Atas</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: COUPLE -->
+            <section id="couple" class="slide-section px-6 py-10" data-bg="1">
+                <div class="animate-view morph-rise text-center mb-6 mt-10">
+                    <i class="fas fa-bismillah text-3xl mb-2 text-dusty" style="font-family: serif;">﷽</i>
+                    <p class="font-playfair text-sm text-readable-sub leading-relaxed italic">
+                        "Dengan Memohon Rahmat Allah SWT.<br>
+                        Kami Menyelenggarakan Syukuran Pernikahan Putra Putri Kami."
+                    </p>
+                </div>
+
+                <div class="flex flex-col items-center gap-6">
+                    <!-- Bride -->
+                    <div class="animate-view flip-in card-modern p-6 flex flex-col items-center w-full max-w-[320px]">
+                        <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-dusty mb-4 shadow-md">
+                            <img src="wanita.png" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-brittany text-2xl whitespace-nowrap text-readable text-center mb-1">Suhra
+                            Arifin, S.Farm</h3>
+                        <p class="text-xs text-readable-muted text-center">Putri ke-2 dari Bapak Arifin (Alm.) & Ibu Hj.
+                            Bahnia</p>
+                    </div>
+
+                    <div class="animate-view pop-in delay-200 text-3xl font-vibes text-gold">&</div>
+
+                    <!-- Groom -->
+                    <div
+                        class="animate-view slide-right delay-300 card-modern p-6 flex flex-col items-center w-full max-w-[320px]">
+                        <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-dusty mb-4 shadow-md">
+                            <img src="pria.png" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-brittany text-2xl whitespace-nowrap text-readable text-center mb-1">Mansur</h3>
+                        <p class="text-xs text-readable-muted text-center">Putra ke-3 dari Bapak Nyaman & Ibu Mida
+                            (Alm.)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: SCHEDULE -->
+            <section id="schedule" class="slide-section px-6 py-12" data-bg="2">
+                <div class="animate-view morph-rise text-center mb-8 mt-10">
+                    <h2 class="font-brittany text-4xl text-readable mb-2 glass-text-bold">Rangkaian Acara</h2>
+                    <p class="font-playfair text-xs text-black font-medium" style="text-shadow: 0 0 4px rgba(255,255,255,0.9), 0 0 8px rgba(255,255,255,0.7);">Kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
+                </div>
+
+                <div class="timeline-container relative w-full px-2">
+
+                    <div class="timeline-item">
+                        <div class="card-modern p-5 shadow-lg animate-view slide-left delay-200">
+                            <h3 class="font-playfair font-bold text-lg text-gold-dark mb-1">Akad Nikah</h3>
+                            <p class="text-xs mb-1 text-black"><i class="far fa-calendar-alt text-gold mr-2"></i> Kamis, 04 Juni 2026</p>
+                            <p class="text-xs mb-1 text-black"><i class="far fa-clock text-gold mr-2"></i> 10:00 WITA - Selesai</p>
+                            <p class="text-xs text-black"><i class="fas fa-map-marker-alt text-gold mr-2"></i> Lokasi: [Kediaman Mempelai Wanita : Salukaili]</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="card-modern p-5 shadow-lg animate-view slide-left delay-300">
+                            <h3 class="font-playfair font-bold text-lg text-gold-dark mb-1">Resepsi</h3>
+                            <p class="text-xs mb-1 text-black"><i class="far fa-calendar-alt text-gold mr-2"></i> Kamis, 04 Juni 2026</p>
+                            <p class="text-xs mb-1 text-black"><i class="far fa-clock text-gold mr-2"></i> 19:00 WITA - Selesai</p>
+                            <p class="text-xs text-black"><i class="fas fa-map-marker-alt text-gold mr-2"></i> Lokasi: [Salukaili, Dusun Salukaili Desa Kasano Kec. Baras (Dekat SMPN 1 BARAS)]</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: GIFT -->
+            <section id="gift" class="slide-section px-6 py-12" data-bg="1">
+                <div class="animate-view morph-rise text-center mb-8 mt-10">
+                    <h2 class="font-brittany text-4xl text-readable mb-2 glass-text-bold">Wedding Gift</h2>
+                    <p class="font-playfair text-xs text-readable-sub glass-text">Doa Restu Anda sangat berarti. Tanda
+                        kasih secara cashless dapat disalurkan melalui:</p>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <!-- Bank 1 -->
+                    <div class="animate-view flip-in card-modern p-5 shadow-lg text-center relative overflow-hidden">
+                        <h3 class="font-bold text-lg text-blue-700">BRI</h3>
+                        <p class="font-mono text-base tracking-widest my-1 text-readable" id="rek-bri">495201034517531
+                        </p>
+                        <p class="text-xs text-readable-muted mb-3">a.n SUHRA ARIFIN</p>
+                        <button onclick="copyText('rek-bri')"
+                            class="bg-white/30 backdrop-blur-sm text-dark text-xs px-4 py-2 rounded-lg shadow-sm hover:bg-white/50 border border-white/40 transition">
+                            <i class="far fa-copy"></i> Salin Rekening
+                        </button>
+                    </div>
+                    <!-- Bank 2 -->
+                    <div
+                        class="animate-view flip-in delay-200 card-modern p-5 shadow-lg text-center relative overflow-hidden">
+                        <h3 class="font-bold text-lg text-orange-600">BNI</h3>
+                        <p class="font-mono text-base tracking-widest my-1 text-readable" id="rek-bni">0987654321</p>
+                        <p class="text-xs text-readable-muted mb-3">a.n Ancu</p>
+                        <button onclick="copyText('rek-bni')"
+                            class="bg-white/30 backdrop-blur-sm text-dark text-xs px-4 py-2 rounded-lg shadow-sm hover:bg-white/50 border border-white/40 transition">
+                            <i class="far fa-copy"></i> Salin Rekening
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Toast Notification -->
+                <div id="toast"
+                    class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-dark text-white px-4 py-2 rounded-lg opacity-0 transition-opacity duration-300 pointer-events-none z-[80] text-sm whitespace-nowrap">
+                    Berhasil disalin!
+                </div>
+            </section>
+
+            <!-- SLIDE 5: WISHES & FOOTER -->
+            <section id="wishes" class="slide-section px-6 py-12 pb-24" data-bg="2">
+                <div class="animate-view morph-rise text-center mb-6 mt-10">
+                    <h2 class="font-brittany text-4xl text-readable mb-2 glass-text-bold">Kirim Ucapan</h2>
+                    <p class="font-playfair text-xs text-readable-sub glass-text">Tuliskan doa untuk kedua mempelai.</p>
+                </div>
+
+                <div
+                    class="card-modern p-5 shadow-lg border-t-4 border-gold animate-view zoom-in flex flex-col mb-10 w-full max-w-sm mx-auto">
+                    <form id="wish-form" onsubmit="submitWish(event)" class="space-y-3 mb-4">
+                        <input type="text" id="w-name" required placeholder="Nama Anda"
+                            class="w-full px-3 py-2 text-sm bg-white/30 border border-white/40 rounded-lg focus:outline-none focus:border-dusty focus:bg-white/50 transition backdrop-blur-sm placeholder-gray-500">
+                        <select id="w-attend" required
+                            class="w-full px-3 py-2 text-sm bg-white/30 border border-white/40 rounded-lg focus:outline-none focus:border-dusty focus:bg-white/50 transition backdrop-blur-sm text-gray-700">
+                            <option value="" disabled selected>Kehadiran</option>
+                            <option value="Hadir">Hadir</option>
+                            <option value="Tidak Hadir">Tidak Hadir</option>
+                        </select>
+                        <textarea id="w-msg" required rows="2" placeholder="Ucapan & doa..."
+                            class="w-full px-3 py-2 text-sm bg-white/30 border border-white/40 rounded-lg focus:outline-none focus:border-dusty focus:bg-white/50 transition backdrop-blur-sm placeholder-gray-500"></textarea>
+                        <button type="submit"
+                            class="w-full bg-dusty/80 backdrop-blur-sm text-white font-semibold py-2.5 rounded-lg hover:bg-gold transition shadow-lg text-sm border border-dusty/30">
+                            Kirim Ucapan
+                        </button>
+                    </form>
+
+                    <div class="border-t border-white/30 pt-4 overflow-y-auto max-h-40" id="wishes-container">
+                        <div class="bg-white/25 backdrop-blur-sm p-3 rounded-lg mb-3 border border-white/30">
+                            <div class="flex items-center gap-2 mb-1">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-gold text-white flex items-center justify-center font-bold text-xs">
+                                    A</div>
+                                <div>
+                                    <h4 class="font-bold text-xs text-readable glass-text">Andi</h4>
+                                    <span
+                                        class="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full">Hadir</span>
+                                </div>
+                            </div>
+                            <p class="text-xs text-readable-sub glass-text">Selamat menempuh hidup baru Suhra dan Ancu.
+                                Semoga langgeng selamanya.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer embedded in last slide -->
+                <div class="text-center mt-auto animate-view morph-rise delay-200">
+                    <h2 class="font-brittany text-4xl text-readable mb-4">Thank You</h2>
+
+                    <div class="card-modern p-4 shadow-lg max-w-[260px] mx-auto mt-2 mb-4">
+                        <p class="text-[10px] text-black font-medium mb-1">Undangan Digital Dibuat Oleh</p>
+                        <h4 class="font-playfair font-bold text-sm text-gold-dark mb-2">WarDigital</h4>
+                        <a href="https://instagram.com/war.digital_" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-1.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-[11px] font-semibold px-4 py-1.5 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all">
+                            <i class="fab fa-instagram text-sm"></i> @war.digital_
+                        </a>
+                        <p class="text-[9px] text-readable-muted mt-2">© 2026 All Rights Reserved</p>
+                    </div>
+                </div>
+            </section>
+        </div> <!-- End Content Wrapper -->
+    </div> <!-- End App Container -->
+
+    <script>
+        // MASUKKAN URL WEB APP GOOGLE APPS SCRIPT ANDA DI SINI
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwlHEbRMSyh6Mnfj9byZLH3QXLL8PDN3hFQPhbJ1wg0Q63ODl4i7pMBxqD7j0mC0E6ARw/exec";
+
+        // 1. Loading Screen & Init
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loading');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 700);
+            }, 1000);
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const to = urlParams.get('to');
+            if (to) document.getElementById('guest-name').innerText = to;
+
+            // Memuat ucapan dari Google Sheets jika URL sudah diisi
+            loadWishes();
+        });
+
+        // 2. Open Invitation
+        function openInvitation() {
+            // Slide out the cover
+            document.getElementById('cover').style.transform = 'translateY(-100vh)';
+
+            // UNLOCK the main scroll container! This fixes the "no slides appearing" bug.
+            document.getElementById('app-container').style.overflowY = 'auto';
+
+            // Show music button
+            document.getElementById('music-toggle').classList.remove('hidden');
+
+            // Play music
+            const audio = document.getElementById('bg-music');
+            audio.play().then(() => {
+                document.getElementById('music-toggle').classList.remove('paused');
+            }).catch(e => console.log("Auto-play prevented"));
+
+            // Trigger animations for the first slide immediately
+            setTimeout(() => {
+                document.querySelectorAll('#hero .animate-view').forEach(el => el.classList.add('show'));
+            }, 300);
+
+            // Start flowers
+            createFlowers();
+        }
+
+        // 3. Audio Control
+        function toggleMusic() {
+            const audio = document.getElementById('bg-music');
+            const btn = document.getElementById('music-toggle');
+            const icon = btn.querySelector('i');
+            if (audio.paused) {
+                audio.play();
+                btn.classList.remove('paused');
+                icon.className = 'fas fa-compact-disc text-2xl';
+            } else {
+                audio.pause();
+                btn.classList.add('paused');
+                icon.className = 'fas fa-pause text-2xl';
+            }
+        }
+
+        // 4. Countdown Timer
+        const targetDate = new Date("Jun 4, 2026 09:00:00").getTime();
+        setInterval(() => {
+            const distance = targetDate - new Date().getTime();
+            if (distance < 0) return;
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
+
+        // 5. Copy Text
+        function copyText(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.style.opacity = '1';
+                setTimeout(() => toast.style.opacity = '0', 2000);
+            });
+        }
+
+        // Fungsi memuat ucapan dari Google Sheets
+        function loadWishes() {
+            if (!SCRIPT_URL) return;
+
+            const cont = document.getElementById('wishes-container');
+            cont.innerHTML = '<p class="text-xs text-center text-readable-muted py-4"><i class="fas fa-spinner animate-spin mr-2"></i>Memuat ucapan...</p>';
+
+            fetch(SCRIPT_URL)
+                .then(res => res.json())
+                .then(data => {
+                    cont.innerHTML = '';
+                    if (data.length === 0) {
+                        cont.innerHTML = '<p class="text-xs text-center text-readable-muted py-4">Belum ada ucapan.</p>';
+                        return;
+                    }
+                    data.forEach(item => {
+                        const init = item.nama ? item.nama.charAt(0).toUpperCase() : '?';
+                        const bg = item.kehadiran === 'Hadir' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700';
+                        const html = `
+                            <div class="bg-white/25 backdrop-blur-sm p-3 rounded-lg mb-3 border border-white/30 show">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <div class="w-6 h-6 rounded-full bg-dusty text-white flex items-center justify-center font-bold text-xs">${init}</div>
+                                    <div>
+                                        <h4 class="font-bold text-xs text-readable glass-text">${item.nama}</h4>
+                                        <span class="text-[10px] ${bg} px-1.5 py-0.5 rounded-full">${item.kehadiran}</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-readable-sub glass-text">${item.pesan}</p>
+                            </div>
+                        `;
+                        cont.insertAdjacentHTML('beforeend', html);
+                    });
+                })
+                .catch(err => {
+                    console.error("Gagal memuat ucapan:", err);
+                    cont.innerHTML = '<p class="text-xs text-center text-red-500 py-4">Gagal memuat ucapan.</p>';
+                });
+        }
+
+        // 6. Wishes Form
+        function submitWish(e) {
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+
+            const name = document.getElementById('w-name').value;
+            const attend = document.getElementById('w-attend').value;
+            const msg = document.getElementById('w-msg').value;
+            const init = name.charAt(0).toUpperCase();
+            const bg = attend === 'Hadir' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700';
+
+            const html = `
+                <div class="bg-white/25 backdrop-blur-sm p-3 rounded-lg mb-3 border border-white/30 animate-view zoom-in">
+                    <div class="flex items-center gap-2 mb-1">
+                        <div class="w-6 h-6 rounded-full bg-dusty text-white flex items-center justify-center font-bold text-xs">${init}</div>
+                        <div>
+                            <h4 class="font-bold text-xs text-readable glass-text">${name}</h4>
+                            <span class="text-[10px] ${bg} px-1.5 py-0.5 rounded-full">${attend}</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-readable-sub glass-text">${msg}</p>
+                </div>
+            `;
+
+            if (!SCRIPT_URL) {
+                // Jika URL belum diset, langsung tampilkan di lokal secara offline
+                const cont = document.getElementById('wishes-container');
+                cont.insertAdjacentHTML('afterbegin', html);
+                setTimeout(() => cont.firstElementChild.classList.add('show'), 50);
+                e.target.reset();
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner animate-spin mr-2"></i>Mengirim...';
+
+            const formData = new URLSearchParams();
+            formData.append('nama', name);
+            formData.append('kehadiran', attend);
+            formData.append('pesan', msg);
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            })
+                .then(() => {
+                    const cont = document.getElementById('wishes-container');
+                    if (cont.querySelector('.text-readable-muted') || cont.querySelector('.text-red-500')) {
+                        cont.innerHTML = '';
+                    }
+                    cont.insertAdjacentHTML('afterbegin', html);
+                    setTimeout(() => cont.firstElementChild.classList.add('show'), 50);
+                    e.target.reset();
+                })
+                .catch(err => {
+                    console.error("Gagal mengirim ucapan:", err);
+                    alert("Gagal mengirim ucapan. Silakan coba lagi.");
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
+                });
+        }
+
+        // 7. Intersection Observer for Scroll Animations
+        // This perfectly tracks elements inside the scrolling container
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                } else {
+                    entry.target.classList.remove('show');
+                }
+            });
+        }, {
+            root: document.getElementById('app-container'),
+            threshold: 0.08
+        });
+
+        const bgObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bgType = entry.target.getAttribute('data-bg');
+                    if (bgType === '1') {
+                        document.getElementById('bg-layer-1').style.opacity = '1';
+                        document.getElementById('bg-layer-2').style.opacity = '0';
+                    } else if (bgType === '2') {
+                        document.getElementById('bg-layer-1').style.opacity = '0';
+                        document.getElementById('bg-layer-2').style.opacity = '1';
+                    }
+                }
+            });
+        }, {
+            root: document.getElementById('app-container'),
+            threshold: 0.4
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.animate-view').forEach(el => observer.observe(el));
+            document.querySelectorAll('section[data-bg]').forEach(el => bgObserver.observe(el));
+        });
+
+        // 8. Falling Flowers
+        function createFlowers() {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(createSingleFlower, Math.random() * 5000);
+            }
+        }
+        function createSingleFlower() {
+            const f = document.createElement('div');
+            f.className = 'flower';
+            f.style.left = Math.random() * 100 + '%';
+            // Position relative to current scroll
+            f.style.top = (document.getElementById('app-container').scrollTop - 50) + 'px';
+            f.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            document.getElementById('app-container').appendChild(f);
+            f.addEventListener('animationend', () => {
+                f.remove();
+                createSingleFlower();
+            });
+        }
+    </script>
+</body>
+
+</html>
